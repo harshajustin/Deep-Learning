@@ -1,47 +1,46 @@
 # Core Deep Learning Frameworks
-tensorflow>=2.13.0
-keras>=2.13.0
-torch>=2.0.0
-torchvision>=0.15.0
-torchaudio>=2.0.0
+tensorflow
+torch
+torchvision
+torchaudio
 
 # Data Science and Numerical Computing
-numpy>=1.24.0
-pandas>=2.0.0
-scipy>=1.10.0
+numpy
+pandas
+scipy
 
 # Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
-plotly>=5.14.0
+matplotlib
+seaborn
+plotly
 
 # Image Processing
-opencv-python>=4.7.0
-Pillow>=9.5.0
-scikit-image>=0.20.0
+opencv-python
+Pillow
+scikit-image
 
 # Machine Learning
-scikit-learn>=1.2.0
-xgboost>=1.7.0
-lightgbm>=3.3.0
+scikit-learn
+xgboost
+lightgbm
 
 # Jupyter and Interactive Development
-jupyter>=1.0.0
-jupyterlab>=4.0.0
-ipywidgets>=8.0.0
+jupyter
+jupyterlab
+ipywidgets
 
 # Model Evaluation and Metrics
-tensorboard>=2.13.0
-wandb>=0.15.0
+tensorboard
+wandb
 
 # Natural Language Processing (optional)
-transformers>=4.30.0
-nltk>=3.8.0
-spacy>=3.5.0
+transformers
+nltk
+spacy
 
 # Computer Vision (optional)
-albumentations>=1.3.0
+albumentations
 
 # Utilities
-tqdm>=4.65.0
-requests>=2.28.0
+tqdm
+requests

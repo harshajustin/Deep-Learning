@@ -8146,7 +8146,7 @@ Generalization Gap: 0.0410
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7a22fefc">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7a22fefc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8154,57 +8154,96 @@ Generalization Gap: 0.0410
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Export notebook to HTML (alternative to PDF)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Export notebook to HTML (alternative to PDF since XeLaTeX is not installed)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="c1"># Get the current notebook path</span>
-<span class="n">notebook_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"d:\Deep-Learning\Lab 2\mnist.ipynb"</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"d:\Deep-Learning\Lab 2"</span>
+<span class="c1"># Get the current notebook path - corrected for macOS</span>
+<span class="n">notebook_path</span> <span class="o">=</span> <span class="s2">"/Users/harsha/Documents/GitHub/Deep-Learning/Lab 2/mnist.ipynb"</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"/Users/harsha/Documents/GitHub/Deep-Learning/Lab 2"</span>
 <span class="n">html_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"mnist_analysis.html"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"🔄 Attempting to export notebook to HTML..."</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="c1"># Try to convert using nbconvert</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"nbconvert"</span><span class="p">,</span> 
         <span class="s2">"--to"</span><span class="p">,</span> <span class="s2">"html"</span><span class="p">,</span> 
-        <span class="s2">"--output"</span><span class="p">,</span> <span class="n">html_output</span><span class="p">,</span>
+        <span class="s2">"--output-dir"</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span>
+        <span class="s2">"--output"</span><span class="p">,</span> <span class="s2">"mnist_analysis"</span><span class="p">,</span>
         <span class="n">notebook_path</span>
     <span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Successfully exported to HTML!"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📁 Output file: </span><span class="si">{</span><span class="n">html_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📋 To convert to PDF:"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"1. Open the HTML file in your browser"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"2. Use Ctrl+P (or Cmd+P on Mac)"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"3. Select 'Save as PDF' or 'Print to PDF'"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📁 File size: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">html_output</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> KB"</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📋 To convert to PDF (since XeLaTeX is not installed):"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"1. Open the HTML file in your browser:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   file://</span><span class="si">{</span><span class="n">html_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"2. Use Cmd+P (Print)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"3. Select 'Save as PDF' from the destination dropdown"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"4. Save as 'mnist_analysis.pdf'"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✨ Alternative: Use VS Code's built-in export:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"   File → Export → Export as HTML/PDF"</span><span class="p">)</span>
     
 <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ nbconvert failed. Let's try an alternative method..."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ nbconvert failed. Trying to install/fix..."</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     
-    <span class="c1"># Alternative: Install nbconvert if missing</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🔧 Installing nbconvert..."</span><span class="p">)</span>
+    <span class="c1"># Check if nbconvert is available</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"pip"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"nbconvert"</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ nbconvert installed! Please run this cell again."</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">install_error</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Installation failed: </span><span class="si">{</span><span class="n">install_error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📝 Manual steps:"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"1. Install nbconvert: pip install nbconvert"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"2. Run: jupyter nbconvert --to html mnist.ipynb"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"3. Open the HTML file and print to PDF"</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">,</span> <span class="s2">"import nbconvert; print('nbconvert available')"</span><span class="p">],</span> 
+                              <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ nbconvert is installed"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"🔧 Issue might be with the file path. Let's try a simpler approach..."</span><span class="p">)</span>
+        
+        <span class="c1"># Try simpler command</span>
+        <span class="n">simple_result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
+            <span class="s2">"jupyter"</span><span class="p">,</span> <span class="s2">"nbconvert"</span><span class="p">,</span> <span class="s2">"--to"</span><span class="p">,</span> <span class="s2">"html"</span><span class="p">,</span> 
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">simple_result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Export successful with simpler command!"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Still failed: </span><span class="si">{</span><span class="n">simple_result</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">check_error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ nbconvert not available. Installing..."</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"pip"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"nbconvert[webpdf]"</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ nbconvert installed! Please run this cell again."</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">install_error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Installation failed: </span><span class="si">{</span><span class="n">install_error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Jupyter/nbconvert not found."</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📝 Alternative approach:"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"1. In VS Code, go to File → Export"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"2. Choose 'Export as HTML'"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"3. Open the HTML file in browser"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"4. Use browser's 'Print to PDF' feature"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Jupyter/nbconvert not found in PATH."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📝 Manual export options:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"1. In VS Code: File → Export → Export as HTML"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"2. In VS Code: File → Export → Export as PDF (if available)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"3. In Jupyter: File → Download as → HTML"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"4. Copy notebook content and paste into a document"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">💡 Pro tip: For future PDF exports without XeLaTeX:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"   Install Pandoc: brew install pandoc"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"   Then use: jupyter nbconvert --to pdf --template classic notebook.ipynb"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>🔄 Attempting to export notebook to HTML...
+</pre>
 </div>
 </div>
 </div>
